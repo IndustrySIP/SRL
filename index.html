@@ -13,7 +13,7 @@
     }
 
     header {
-      background-color: #222;
+      background-color: #1f2f40;
       color: white;
       padding: 1em;
       text-align: center;
@@ -31,10 +31,11 @@
     }
 
     .hero {
-      background-color: #333;
+      background-color: #2e4a62;
       color: white;
       padding: 4em 2em;
       text-align: center;
+      animation: fadeIn 1s ease;
     }
 
     section {
@@ -42,6 +43,7 @@
       padding: 2em;
       max-width: 1000px;
       margin: auto;
+      animation: fadeIn 0.5s ease;
     }
 
     section.active {
@@ -49,7 +51,7 @@
     }
 
     h2 {
-      color: #222;
+      color: #1f2f40;
       margin-bottom: 1em;
     }
 
@@ -58,11 +60,30 @@
       padding-left: 1.5em;
     }
 
-    .timeline div {
+    .timeline .year {
       margin: 10px 0;
       padding: 10px;
-      border-left: 4px solid #555;
-      background-color: #fafafa;
+      border-left: 4px solid #1f2f40;
+      background-color: #f0f8ff;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .timeline .year:hover {
+      background-color: #ddefff;
+    }
+
+    .timeline .year.active {
+      background-color: #d0e2ff;
+    }
+
+    .year-content {
+      display: none;
+      margin-top: 10px;
+    }
+
+    .year.active .year-content {
+      display: block;
     }
 
     .product-quality {
@@ -83,7 +104,7 @@
 
     form button {
       padding: 0.75em 1.5em;
-      background-color: #333;
+      background-color: #2e4a62;
       color: white;
       border: none;
       border-radius: 4px;
@@ -91,17 +112,26 @@
     }
 
     footer {
-      background-color: #222;
+      background-color: #1f2f40;
       color: white;
       text-align: center;
       padding: 1em;
       margin-top: 3em;
     }
 
-    /* Para mostrar el contacto adicional */
     .contact-info {
       margin-top: 1em;
       font-weight: bold;
+    }
+
+    .nosotros-contenido h3 {
+      margin-top: 1em;
+      color: #2e4a62;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
@@ -110,6 +140,7 @@
     <h1>INDUSTRY S.I.P</h1>
     <nav>
       <a onclick="mostrarSeccion('inicio')">Inicio</a>
+      <a onclick="mostrarSeccion('nosotros')">Nosotros</a>
       <a onclick="mostrarSeccion('integrantes')">Integrantes</a>
       <a onclick="mostrarSeccion('historia')">Historia</a>
       <a onclick="mostrarSeccion('calidad')">Calidad del Producto</a>
@@ -118,8 +149,41 @@
   </header>
 
   <section id="inicio" class="hero active">
-    <h2>Bienvenido a Industry S.I.P</h2>
+    <h2 style="color:white;">Bienvenido a Industry S.I.P</h2>
     <p>Soluciones eficientes con paneles PIR.</p>
+    <p>
+      En un mundo que exige construcciones más eficientes, rápidas y sostenibles, los métodos tradicionales ya no alcanzan. En Industry S.I.P desarrollamos paneles con núcleo de PIR (Poliisocianurato) para resolver los problemas más comunes en la industria de la construcción: el alto consumo energético, la dificultad de montaje, la pérdida de calor y la baja resistencia al fuego. <br><br>
+      Nuestros productos no solo aíslan térmicamente, sino que también reducen los tiempos de instalación, mejoran la eficiencia energética y elevan el estándar estético y funcional de cualquier obra, ya sea industrial o residencial.
+    </p>
+  </section>
+
+  <section id="nosotros">
+    <h2>Nosotros</h2>
+    <div class="nosotros-contenido">
+      <h3>Propósito</h3>
+      <p>
+        En Industry S.I.P., nuestro propósito es ofrecer soluciones de aislamiento térmico y acústico de alta calidad, contribuyendo al desarrollo de construcciones más eficientes, seguras y sostenibles.
+      </p>
+
+      <h3>Visión</h3>
+      <p>
+        Ser líderes en la fabricación de paneles aislantes de PIR en la región, reconocidos por nuestra innovación, compromiso con el medio ambiente y excelencia en el servicio al cliente.
+      </p>
+
+      <h3>Misión</h3>
+      <p>
+        Desarrollar y proporcionar productos de aislamiento que satisfagan las necesidades del mercado, promoviendo la eficiencia energética, la seguridad y el confort en las edificaciones, mientras mantenemos un firme compromiso con la sostenibilidad y la mejora continua.
+      </p>
+
+      <h3>Valores</h3>
+      <ul>
+        <li><strong>Innovación:</strong> Mejoramos constantemente nuestros productos y procesos.</li>
+        <li><strong>Calidad:</strong> Cumplimos altos estándares en cada etapa de producción.</li>
+        <li><strong>Sostenibilidad:</strong> Trabajamos para minimizar nuestro impacto ambiental.</li>
+        <li><strong>Compromiso:</strong> Satisfacemos las expectativas de nuestros clientes y colaboradores.</li>
+        <li><strong>Integridad:</strong> Actuamos con honestidad y transparencia.</li>
+      </ul>
+    </div>
   </section>
 
   <section id="integrantes">
@@ -137,11 +201,36 @@
   <section id="historia">
     <h2>Historia</h2>
     <div class="timeline">
-      <div><strong>1930-1950:</strong> Origen</div>
-      <div><strong>1960-1970:</strong> Expansión industrial</div>
-      <div><strong>1980-1990:</strong> Normalización y seguridad</div>
-      <div><strong>2000-2010:</strong> Innovación y sostenibilidad</div>
-      <div><strong>2010-Presente:</strong> Actualidad</div>
+      <div class="year" onclick="toggleYear(this)">
+        <strong>1930-1950:</strong> Origen
+        <div class="year-content">
+          <p>Durante estas décadas surgieron las primeras necesidades industriales de aislamiento térmico, sentando las bases de tecnologías que evolucionarían en los años posteriores.</p>
+        </div>
+      </div>
+      <div class="year" onclick="toggleYear(this)">
+        <strong>1960-1970:</strong> Expansión industrial
+        <div class="year-content">
+          <p>La industria de la construcción creció exponencialmente, impulsando la demanda de soluciones aislantes más eficientes y seguras para uso industrial y comercial.</p>
+        </div>
+      </div>
+      <div class="year" onclick="toggleYear(this)">
+        <strong>1980-1990:</strong> Normalización y seguridad
+        <div class="year-content">
+          <p>Comenzaron a establecerse normativas y estándares internacionales que exigieron mayor rendimiento térmico y seguridad contra incendios en los materiales constructivos.</p>
+        </div>
+      </div>
+      <div class="year" onclick="toggleYear(this)">
+        <strong>2000-2010:</strong> Innovación y sostenibilidad
+        <div class="year-content">
+          <p>La innovación en materiales llevó al desarrollo del PIR como aislante líder, con excelentes propiedades térmicas, acústicas y de resistencia al fuego.</p>
+        </div>
+      </div>
+      <div class="year" onclick="toggleYear(this)">
+        <strong>2010-Presente:</strong> Actualidad
+        <div class="year-content">
+          <p>Hoy en día, Industry S.I.P. forma parte del avance hacia una construcción más sustentable, eficiente y estética, ofreciendo paneles PIR de última generación.</p>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -162,10 +251,7 @@
 
   <section id="contacto">
     <h2>Contacto</h2>
-    <form
-      action="https://formspree.io/f/xrbkzlwg"
-      method="POST"
-    >
+    <form action="https://formspree.io/f/xrbkzlwg" method="POST">
       <input type="text" name="name" placeholder="Tu nombre" required />
       <input type="email" name="email" placeholder="Tu correo" required />
       <textarea name="message" placeholder="Escribí tu mensaje"></textarea>
@@ -184,13 +270,23 @@
   <script>
     function mostrarSeccion(id) {
       const secciones = document.querySelectorAll("section");
-      secciones.forEach(seccion => {
-        seccion.classList.remove("active");
-      });
+      secciones.forEach(seccion => seccion.classList.remove("active"));
 
       const seleccionada = document.getElementById(id);
       if (seleccionada) {
         seleccionada.classList.add("active");
+
+        if (id !== "historia") {
+          document.querySelectorAll('.timeline .year').forEach(y => y.classList.remove('active'));
+        }
+      }
+    }
+
+    function toggleYear(element) {
+      const isActive = element.classList.contains('active');
+      document.querySelectorAll('.timeline .year').forEach(y => y.classList.remove('active'));
+      if (!isActive) {
+        element.classList.add('active');
       }
     }
   </script>
