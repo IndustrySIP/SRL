@@ -8,19 +8,19 @@
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background-color: #f4f4f4;
-      color: #1f2f40;
+      background-color: #f9f5f1;
+      color: #5a3e1b;
     }
 
     header {
-      background-color: #1f2f40;
+      background-color: #5a3e1b;
       color: white;
       padding: 1em;
       text-align: center;
     }
 
     nav a {
-      color: #ccc;
+      color: #d1bfa7;
       margin: 0 10px;
       text-decoration: none;
       cursor: pointer;
@@ -38,7 +38,7 @@
     }
 
     .hero h2, .hero p {
-      color: #1f2f40;
+      color: #5a3e1b;
     }
 
     .inicio-grid {
@@ -50,11 +50,11 @@
     }
 
     .destacado {
-      background-color: #f0f8ff;
+      background-color: #f6ede3;
       padding: 2em;
       border-radius: 8px;
       max-width: 500px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 2px 8px rgba(90, 62, 27, 0.1);
       animation: fadeIn 1s ease;
     }
 
@@ -71,7 +71,7 @@
     }
 
     h2 {
-      color: #1f2f40;
+      color: #5a3e1b;
       margin-bottom: 1em;
     }
 
@@ -83,18 +83,18 @@
     .timeline .year {
       margin: 10px 0;
       padding: 10px;
-      border-left: 4px solid #1f2f40;
-      background-color: #f0f8ff;
+      border-left: 4px solid #5a3e1b;
+      background-color: #f6ede3;
       cursor: pointer;
       transition: all 0.3s ease;
     }
 
     .timeline .year:hover {
-      background-color: #ddefff;
+      background-color: #eadfca;
     }
 
     .timeline .year.active {
-      background-color: #d0e2ff;
+      background-color: #d9cbb3;
     }
 
     .year-content {
@@ -107,32 +107,44 @@
     }
 
     .product-quality {
-      background-color: #eaeaea;
+      background-color: #f3efe8;
       padding: 1.5em;
       border-radius: 8px;
       line-height: 1.6;
+      color: #5a3e1b;
     }
 
     form input,
-    form textarea {
+    form textarea,
+    form select {
       width: 100%;
       padding: 0.75em;
       margin-bottom: 1em;
-      border: 1px solid #ccc;
+      border: 1px solid #cbb68f;
       border-radius: 4px;
+      font-family: inherit;
+      font-size: 1em;
+      color: #5a3e1b;
+      background-color: #fff8f0;
     }
 
     form button {
       padding: 0.75em 1.5em;
-      background-color: #2e4a62;
+      background-color: #5a3e1b;
       color: white;
       border: none;
       border-radius: 4px;
       cursor: pointer;
+      font-weight: bold;
+      font-size: 1em;
+    }
+
+    form button:hover {
+      background-color: #7b5c29;
     }
 
     footer {
-      background-color: #1f2f40;
+      background-color: #5a3e1b;
       color: white;
       text-align: center;
       padding: 1em;
@@ -146,7 +158,30 @@
 
     .nosotros-contenido h3 {
       margin-top: 1em;
-      color: #2e4a62;
+      color: #7b5c29;
+    }
+
+    .productos-grid {
+      display: flex;
+      gap: 2em;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 2em;
+    }
+
+    .producto {
+      background-color: #f6ede3;
+      padding: 1.5em;
+      border-radius: 8px;
+      max-width: 350px;
+      box-shadow: 0 2px 8px rgba(90, 62, 27, 0.1);
+      text-align: center;
+    }
+
+    .producto img {
+      max-width: 100%;
+      border-radius: 4px;
+      margin-bottom: 1em;
     }
 
     @keyframes fadeIn {
@@ -163,14 +198,15 @@
       <a onclick="mostrarSeccion('nosotros')">Nosotros</a>
       <a onclick="mostrarSeccion('integrantes')">Integrantes</a>
       <a onclick="mostrarSeccion('historia')">Historia</a>
+      <a onclick="mostrarSeccion('productos')">Productos</a>
       <a onclick="mostrarSeccion('calidad')">Calidad del Producto</a>
       <a onclick="mostrarSeccion('contacto')">Contacto</a>
     </nav>
   </header>
 
   <section id="inicio" class="hero active">
-    <h2 style="color: #1f2f40;">Bienvenido a Industry S.I.P</h2>
-    <p style="color: #1f2f40;">Soluciones eficientes con paneles PIR.</p>
+    <h2>Bienvenido a Industry S.I.P</h2>
+    <p>Soluciones eficientes con paneles PIR.</p>
     <div class="inicio-grid">
       <div class="destacado">
         <h3>¿Por qué elegir nuestros paneles?</h3>
@@ -268,24 +304,41 @@
     </div>
   </section>
 
+  <section id="productos">
+    <h2>Productos</h2>
+    <div class="productos-grid">
+      <div class="producto">
+        <img src="https://i.imgur.com/L8LZfEw.jpg" alt="Panel con placa simil madera" />
+        <h3>Panel con placa simil madera</h3>
+        <p>
+          Panel de 4 cm con dos caras de chapa galvanizada, cámara de aire y placa simil madera. Excelente aislamiento térmico y resistencia mecánica para diversas aplicaciones.
+        </p>
+      </div>
+      <div class="producto">
+        <img src="https://i.imgur.com/YO1M7R1.jpg" alt="Panel con placa simil cerámico" />
+        <h3>Panel con placa simil cerámico</h3>
+        <p>
+          Panel de 4 cm con dos caras de chapa galvanizada, cámara de aire y placa simil cerámico. Ideal para proyectos que requieren una estética moderna y alta durabilidad.
+        </p>
+      </div>
+    </div>
+  </section>
+
   <section id="calidad">
     <h2>Calidad del Producto</h2>
     <div class="product-quality">
       <p>
-        Nuestros paneles están compuestos por un núcleo rígido de PIR (Poliisocianurato), con una densidad optimizada para brindar el mejor aislamiento térmico y acústico del mercado. Este núcleo está protegido por dos capas:
+        Nuestros paneles cuentan con un núcleo rígido de PIR (Poliisocianurato) optimizado para aislamiento térmico y acústico superior. Se destacan por:
       </p>
       <ul>
-        <li><strong>Cara exterior:</strong> Acabado simil madera con película protectora UV, resistente a impactos, humedad y rayos solares.</li>
-        <li><strong>Cara interior:</strong> Aluminio foil reforzado, que actúa como barrera de vapor y estabilizador térmico.</li>
+        <li><strong>Alta resistencia mecánica:</strong> soportan impactos y esfuerzos estructurales.</li>
+        <li><strong>Baja absorción de agua:</strong> evitan daños y mantienen sus propiedades aislantes.</li>
+        <li><strong>Autoextinguible:</strong> mayor seguridad contra incendios.</li>
+        <li><strong>Fácil manipulación y montaje:</strong> corte sencillo y encastres herméticos.</li>
+        <li><strong>Diseño con cámara de aire:</strong> mejora la aislación térmica y acústica.</li>
       </ul>
       <p>
-        Gracias a su estructura cerrada de celdas, el PIR presenta una muy baja conductividad térmica y alta resistencia mecánica. No se degrada con el tiempo, no absorbe agua, y es autoextinguible. Además, permite fácil manipulación y corte en obra sin desprender partículas peligrosas.
-      </p>
-      <p>
-        El diseño del panel incluye encastres tipo “macho-hembra” que aseguran un montaje hermético y preciso, reduciendo filtraciones y puentes térmicos.
-      </p>
-      <p>
-        Contamos con estrictos controles de calidad en cada etapa de producción, garantizando una performance constante y confiable.
+        Cada panel es fabricado bajo estrictos controles de calidad para asegurar un producto confiable y duradero.
       </p>
     </div>
   </section>
@@ -295,9 +348,28 @@
     <form action="https://formspree.io/f/xrbkzlwg" method="POST">
       <input type="text" name="name" placeholder="Tu nombre" required />
       <input type="email" name="email" placeholder="Tu correo" required />
+      <input type="tel" name="phone" placeholder="Tu teléfono" />
       <textarea name="message" placeholder="Escribí tu mensaje"></textarea>
       <button type="submit">Enviar</button>
     </form>
+
+    <h3>Trabajá con Nosotros</h3>
+    <form action="https://formspree.io/f/xrbkzlwg" method="POST">
+      <input type="text" name="applicant_name" placeholder="Tu nombre completo" required />
+      <input type="email" name="applicant_email" placeholder="Tu correo" required />
+      <input type="tel" name="applicant_phone" placeholder="Tu teléfono" required />
+      <select name="position" required>
+        <option value="" disabled selected>Seleccione el puesto al que aplica</option>
+        <option value="Producción">Producción</option>
+        <option value="Administración">Administración</option>
+        <option value="Ventas">Ventas</option>
+        <option value="Logística">Logística</option>
+        <option value="Otro">Otro</option>
+      </select>
+      <textarea name="applicant_message" placeholder="Mensaje o información adicional"></textarea>
+      <button type="submit">Enviar Datos</button>
+    </form>
+
     <div class="contact-info">
       <p>Email: <a href="mailto:industrysip.srl@gmail.com">industrysip.srl@gmail.com</a></p>
       <p>Teléfono: <a href="tel:+541124730339">+54 11 2473-0339</a></p>
@@ -305,28 +377,20 @@
   </section>
 
   <footer>
-    <p>&copy; 2025 Industry S.I.P. Todos los derechos reservados.</p>
+    <p>&copy; 2025 Industry S.I.P - Todos los derechos reservados</p>
   </footer>
 
   <script>
-    function mostrarSeccion(id) {
-      const secciones = document.querySelectorAll("section");
-      secciones.forEach(seccion => seccion.classList.remove("active"));
-      const seleccionada = document.getElementById(id);
-      if (seleccionada) {
-        seleccionada.classList.add("active");
-        if (id !== "historia") {
-          document.querySelectorAll('.timeline .year').forEach(y => y.classList.remove('active'));
-        }
-      }
+    function mostrarSeccion(seccionId) {
+      const secciones = document.querySelectorAll('section');
+      secciones.forEach(sec => {
+        sec.classList.remove('active');
+      });
+      document.getElementById(seccionId).classList.add('active');
     }
 
     function toggleYear(element) {
-      const isActive = element.classList.contains('active');
-      document.querySelectorAll('.timeline .year').forEach(y => y.classList.remove('active'));
-      if (!isActive) {
-        element.classList.add('active');
-      }
+      element.classList.toggle('active');
     }
   </script>
 </body>
