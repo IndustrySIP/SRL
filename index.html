@@ -1,397 +1,313 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Industry S.I.P</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f9f5f1;
-      color: #5a3e1b;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Industry S.I.P</title>
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f9f9f9;
+  color: #1E3A8A;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  position: relative;
+}
+body::before {
+  content:"";
+  position: fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background: url('LOGO.jpg') center center no-repeat;
+  background-size: 300px;
+  opacity:0.08;
+  z-index:-1;
+  pointer-events:none;
+}
+header {
+  background-color:#1E3A8A;
+  color:white;
+  padding:1em 1.5em;
+  position: fixed;
+  top:0; left:0;
+  width:100%;
+  z-index:1000;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  box-shadow:0 2px 6px rgba(0,0,0,0.2);
+}
+#logo-menu {
+  display:flex;
+  align-items:center;
+  cursor:pointer;
+}
+#logo-menu img { width:130px; transition: transform 0.3s; }
+#logo-menu:hover img { transform: scale(1.05); }
+.hamburger {
+  width:20px;
+  height:3px;
+  background:white;
+  margin:3px 0;
+  transition:0.4s;
+}
+nav {
+  height:100%;
+  width:0;
+  position: fixed;
+  z-index:999;
+  top:0; left:0;
+  background-color:#1E3A8A;
+  overflow-x:hidden;
+  padding-top:70px;
+  transition: width 0.5s ease;
+}
+nav a {
+  display:block;
+  padding:15px 30px;
+  font-size:18px;
+  color:#c3d1f7;
+  text-decoration:none;
+  transition: color 0.3s;
+}
+nav a:hover { color:white; }
 
-    header {
-      background-color: #5a3e1b;
-      color: white;
-      padding: 1em;
-      text-align: center;
-    }
+section { display:none; padding:2em; max-width:1000px; margin:100px auto 2em auto; transition: opacity 0.6s ease, transform 0.6s ease;}
+section.active { display:block; opacity:1; transform: translateY(0); }
+h2 { font-size:2em; margin-bottom:1em; }
+h3 { color:#2d4fbb; margin-top:1em; }
 
-    nav a {
-      color: #d1bfa7;
-      margin: 0 10px;
-      text-decoration: none;
-      cursor: pointer;
-    }
+.hero { background-color:#ffffff; padding:6em 2em 4em 2em; text-align:center; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.1);}
+.hero h2 { color:#1E3A8A; }
+.hero p { color:#1E3A8A; font-size:1.1em; }
 
-    nav a:hover {
-      color: white;
-    }
+.inicio-grid { display:flex; flex-wrap:wrap; justify-content:center; gap:2em; margin-top:2em; }
+.destacado { background-color:#e6ebfa; padding:2em; border-radius:8px; max-width:500px; box-shadow:0 2px 12px rgba(30,58,138,0.1); transition: transform 0.3s, box-shadow 0.3s;}
+.destacado:hover { transform: translateY(-5px); box-shadow:0 6px 16px rgba(30,58,138,0.2); }
 
-    .hero {
-      background-color: #ffffff;
-      padding: 4em 2em;
-      text-align: center;
-      animation: fadeIn 1s ease;
-    }
+.timeline .year { margin: 15px 0; padding:15px; border-left:4px solid #1E3A8A; background-color:#e6ebfa; cursor:pointer; overflow:hidden; position:relative; transition: background-color 0.3s, transform 0.3s; border-radius:5px; box-shadow:0 2px 6px rgba(0,0,0,0.05);}
+.timeline .year:hover { transform: translateX(5px);}
+.timeline .year-content { max-height:0; opacity:0; padding-left:15px; transition:max-height 0.6s ease, opacity 0.6s ease; overflow:hidden;}
+.timeline .year.active .year-content { max-height:800px; opacity:1; }
 
-    .hero h2, .hero p {
-      color: #5a3e1b;
-    }
+.productos-grid { display:flex; gap:2em; justify-content:center; flex-wrap:wrap; margin-top:2em; }
+.producto { background-color:#e6ebfa; padding:1.5em; border-radius:8px; max-width:350px; box-shadow:0 2px 12px rgba(30,58,138,0.1); text-align:center; transition: transform 0.3s, box-shadow 0.3s;}
+.producto:hover { transform: translateY(-5px); box-shadow:0 6px 16px rgba(30,58,138,0.2); }
+.producto img { max-width:100%; border-radius:4px; margin-bottom:1em; }
 
-    .inicio-grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 2em;
-      margin-top: 2em;
-    }
+.product-quality { background-color:#e6ebfa; padding:1.5em; border-radius:8px; line-height:1.6; color:#1E3A8A; box-shadow:0 2px 12px rgba(30,58,138,0.1); }
 
-    .destacado {
-      background-color: #f6ede3;
-      padding: 2em;
-      border-radius: 8px;
-      max-width: 500px;
-      box-shadow: 0 2px 8px rgba(90, 62, 27, 0.1);
-      animation: fadeIn 1s ease;
-    }
+form input, form textarea, form select {
+  width:100%; padding:0.75em; margin-bottom:1em; border:1px solid #a7b8f0; border-radius:4px; font-family:inherit; font-size:1em; color:#1E3A8A; background-color:#f0f4ff;
+}
+form button {
+  padding:0.75em 1.5em; background-color:#1E3A8A; color:white; border:none; border-radius:4px; cursor:pointer; font-weight:bold; font-size:1em;
+}
+form button:hover { background-color:#2d4fbb; }
 
-    section {
-      display: none;
-      padding: 2em;
-      max-width: 1000px;
-      margin: auto;
-      animation: fadeIn 0.5s ease;
-    }
+footer { background-color:#1E3A8A; color:white; text-align:center; padding:1em; margin-top:3em; }
 
-    section.active {
-      display: block;
-    }
-
-    h2 {
-      color: #5a3e1b;
-      margin-bottom: 1em;
-    }
-
-    ul {
-      list-style-type: disc;
-      padding-left: 1.5em;
-    }
-
-    .timeline .year {
-      margin: 10px 0;
-      padding: 10px;
-      border-left: 4px solid #5a3e1b;
-      background-color: #f6ede3;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .timeline .year:hover {
-      background-color: #eadfca;
-    }
-
-    .timeline .year.active {
-      background-color: #d9cbb3;
-    }
-
-    .year-content {
-      display: none;
-      margin-top: 10px;
-    }
-
-    .year.active .year-content {
-      display: block;
-    }
-
-    .product-quality {
-      background-color: #f3efe8;
-      padding: 1.5em;
-      border-radius: 8px;
-      line-height: 1.6;
-      color: #5a3e1b;
-    }
-
-    form input,
-    form textarea,
-    form select {
-      width: 100%;
-      padding: 0.75em;
-      margin-bottom: 1em;
-      border: 1px solid #cbb68f;
-      border-radius: 4px;
-      font-family: inherit;
-      font-size: 1em;
-      color: #5a3e1b;
-      background-color: #fff8f0;
-    }
-
-    form button {
-      padding: 0.75em 1.5em;
-      background-color: #5a3e1b;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      font-weight: bold;
-      font-size: 1em;
-    }
-
-    form button:hover {
-      background-color: #7b5c29;
-    }
-
-    footer {
-      background-color: #5a3e1b;
-      color: white;
-      text-align: center;
-      padding: 1em;
-      margin-top: 3em;
-    }
-
-    .contact-info {
-      margin-top: 1em;
-      font-weight: bold;
-    }
-
-    .nosotros-contenido h3 {
-      margin-top: 1em;
-      color: #7b5c29;
-    }
-
-    .productos-grid {
-      display: flex;
-      gap: 2em;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-top: 2em;
-    }
-
-    .producto {
-      background-color: #f6ede3;
-      padding: 1.5em;
-      border-radius: 8px;
-      max-width: 350px;
-      box-shadow: 0 2px 8px rgba(90, 62, 27, 0.1);
-      text-align: center;
-    }
-
-    .producto img {
-      max-width: 100%;
-      border-radius: 4px;
-      margin-bottom: 1em;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-  </style>
+@media(max-width:768px){
+  .inicio-grid, .productos-grid { flex-direction:column; align-items:center; }
+}
+</style>
 </head>
 <body>
-  <header>
-    <h1>INDUSTRY S.I.P</h1>
-    <nav>
-      <a onclick="mostrarSeccion('inicio')">Inicio</a>
-      <a onclick="mostrarSeccion('nosotros')">Nosotros</a>
-      <a onclick="mostrarSeccion('integrantes')">Integrantes</a>
-      <a onclick="mostrarSeccion('historia')">Historia</a>
-      <a onclick="mostrarSeccion('productos')">Productos</a>
-      <a onclick="mostrarSeccion('calidad')">Calidad del Producto</a>
-      <a onclick="mostrarSeccion('contacto')">Contacto</a>
-    </nav>
-  </header>
 
-  <section id="inicio" class="hero active">
-    <h2>Bienvenido a Industry S.I.P</h2>
-    <p>Soluciones eficientes con paneles PIR.</p>
-    <div class="inicio-grid">
-      <div class="destacado">
-        <h3>¿Por qué elegir nuestros paneles?</h3>
-        <p>
-          Los métodos tradicionales de construcción no ofrecen eficiencia energética ni rapidez. Nuestros paneles PIR son la solución moderna: proporcionan alto aislamiento térmico, resistencia al fuego y fácil montaje.
-        </p>
-        <ul>
-          <li><strong>Ahorro de energía:</strong> Reduce costos de climatización hasta un 40%.</li>
-          <li><strong>Resistencia al fuego:</strong> Núcleo autoextinguible, seguro para todos los ambientes.</li>
-          <li><strong>Estética superior:</strong> Acabado moderno y personalizable.</li>
-          <li><strong>Durabilidad:</strong> Más de 30 años de vida útil.</li>
-          <li><strong>Montaje rápido:</strong> Reduce plazos y costos de obra.</li>
-        </ul>
-      </div>
-      <div class="destacado">
-        <h3>Compromiso con el futuro</h3>
-        <p>
-          En un mundo que demanda construcciones más sustentables, nuestros paneles son parte de la solución. Livianos, resistentes, ecológicos y reciclables, son ideales para proyectos industriales, comerciales y residenciales.
-        </p>
-      </div>
-    </div>
-  </section>
+<header>
+  <div id="logo-menu">
+    <img src="LOGO.jpg" alt="Logo">
+    <div class="hamburger"></div>
+    <div class="hamburger"></div>
+    <div class="hamburger"></div>
+  </div>
+  <nav id="nav-menu">
+    <a onclick="mostrarSeccion('inicio')">Inicio</a>
+    <a onclick="mostrarSeccion('nosotros')">Nosotros</a>
+    <a onclick="mostrarSeccion('integrantes')">Integrantes</a>
+    <a onclick="mostrarSeccion('historia')">Historia</a>
+    <a onclick="mostrarSeccion('productos')">Productos</a>
+    <a onclick="mostrarSeccion('calidad')">Calidad</a>
+    <a onclick="mostrarSeccion('contacto')">Contacto</a>
+  </nav>
+</header>
 
-  <section id="nosotros">
-    <h2>Nosotros</h2>
-    <div class="nosotros-contenido">
-      <h3>Propósito</h3>
-      <p>
-        Brindar soluciones constructivas innovadoras a través de paneles de aislamiento térmico de alta tecnología.
-      </p>
-      <h3>Visión</h3>
-      <p>
-        Ser referentes regionales en eficiencia energética aplicada a la construcción.
-      </p>
-      <h3>Misión</h3>
-      <p>
-        Producir paneles de la más alta calidad con compromiso ambiental y enfoque en el cliente.
-      </p>
-      <h3>Valores</h3>
-      <ul>
-        <li>Innovación</li>
-        <li>Calidad</li>
-        <li>Compromiso</li>
-        <li>Responsabilidad</li>
-        <li>Sustentabilidad</li>
-      </ul>
-    </div>
-  </section>
-
-  <section id="integrantes">
-    <h2>Integrantes</h2>
+<section id="inicio" class="hero active">
+<h2>INDUSTRY S.I.P</h2>
+<p>Soluciones avanzadas con paneles PIR de alto rendimiento para construcción industrial, comercial y residencial.</p>
+<div class="inicio-grid">
+  <div class="destacado">
+    <h3>Detalles técnicos</h3>
     <ul>
-      <li>Santillan, Lautaro</li>
-      <li>Gutierrez, Mariano</li>
-      <li>Mella, Nicolás</li>
-      <li>Villan, Santiago</li>
-      <li>Jara, Tomás</li>
-      <li>Mirlhem, Ignacio</li>
+      <li>Núcleo PIR de alta densidad: aislamiento térmico y acústico.</li>
+      <li>Resistencia mecánica: soporta cargas estructurales importantes.</li>
+      <li>Baja absorción de agua y autoextinguible.</li>
+      <li>Sistema de encastres: montaje rápido y seguro.</li>
+      <li>Acabados personalizables: chapa galvanizada o simil madera.</li>
+      <li>Eficiencia energética: reducción de costos hasta 40%.</li>
     </ul>
-  </section>
+  </div>
+  <div class="destacado">
+    <h3>Ambiente y equipo</h3>
+    <p>Trabajamos en un ambiente limpio, seguro y organizado, fomentando un clima laboral positivo. Nuestro equipo altamente capacitado garantiza precisión y eficiencia en cada proyecto.</p>
+  </div>
+</div>
+</section>
 
-  <section id="historia">
-    <h2>Historia</h2>
-    <div class="timeline">
-      <div class="year" onclick="toggleYear(this)">
-        <strong>1930-1950:</strong> Origen
-        <div class="year-content">
-          <p>Surgieron las primeras necesidades industriales de aislamiento térmico.</p>
-        </div>
-      </div>
-      <div class="year" onclick="toggleYear(this)">
-        <strong>1960-1970:</strong> Expansión industrial
-        <div class="year-content">
-          <p>Crece la construcción moderna, se busca eficiencia y seguridad.</p>
-        </div>
-      </div>
-      <div class="year" onclick="toggleYear(this)">
-        <strong>1980-1990:</strong> Normativas
-        <div class="year-content">
-          <p>Se establecen estándares globales de eficiencia y resistencia al fuego.</p>
-        </div>
-      </div>
-      <div class="year" onclick="toggleYear(this)">
-        <strong>2000-2010:</strong> Innovación
-        <div class="year-content">
-          <p>El PIR se posiciona como el aislante más completo del mercado.</p>
-        </div>
-      </div>
-      <div class="year" onclick="toggleYear(this)">
-        <strong>2010-Presente:</strong> Actualidad
-        <div class="year-content">
-          <p>Industry S.I.P ofrece paneles PIR de última generación en toda la región.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+<section id="nosotros">
+<h2>Nosotros</h2>
+<h3>Propósito</h3>
+<p>Brindar soluciones constructivas innovadoras mediante paneles de aislamiento térmico de alta tecnología, asegurando eficiencia, seguridad y durabilidad en cada proyecto, adaptándonos a las necesidades del cliente y del entorno.</p>
+<h3>Misión</h3>
+<p>Producir paneles de la más alta calidad con compromiso ambiental y enfoque en la satisfacción del cliente, promoviendo prácticas sustentables, innovación tecnológica constante, seguridad laboral y un ambiente de trabajo colaborativo y profesional.</p>
+<h3>Valores</h3>
+<ul>
+  <li><strong>Innovación:</strong> Desarrollo constante de soluciones avanzadas y eficientes.</li>
+  <li><strong>Calidad:</strong> Garantía de productos duraderos y confiables mediante estrictos controles.</li>
+  <li><strong>Compromiso:</strong> Responsabilidad con clientes, colaboradores y la comunidad.</li>
+  <li><strong>Responsabilidad:</strong> Cumplimiento de normativas y estándares de seguridad.</li>
+  <li><strong>Sustentabilidad:</strong> Minimización del impacto ambiental en todos nuestros procesos.</li>
+  <li><strong>Transparencia:</strong> Comunicación clara y ética en cada proyecto.</li>
+  <li><strong>Trabajo en equipo:</strong> Fomento del respeto, colaboración y crecimiento conjunto.</li>
+</ul>
+</section>
 
-  <section id="productos">
-    <h2>Productos</h2>
-    <div class="productos-grid">
-      <div class="producto">
-        <img src="Captura de pantalla 2025-06-17 192617.png" alt="Panel con placa simil madera" />
-        <h3>Panel con placa simil madera</h3>
-        <p>
-          Panel de 4 cm con dos caras de chapa galvanizada, cámara de aire y placa simil madera. Excelente aislamiento térmico y resistencia mecánica para diversas aplicaciones.
-        </p>
-      </div>
-      <div class="producto">
-        <img src="https://i.imgur.com/YO1M7R1.jpg" alt="Panel con placa simil cerámico" />
-        <h3>Panel con placa simil cerámico</h3>
-        <p>
-          Panel de 4 cm con dos caras de chapa galvanizada, cámara de aire y placa simil cerámico. Ideal para proyectos que requieren una estética moderna y alta durabilidad.
-        </p>
-      </div>
-    </div>
-  </section>
+<section id="integrantes">
+<h2>Integrantes</h2>
+<ul>
+  <li>Santillan, Lautaro</li>
+  <li>Gutierrez, Mariano</li>
+  <li>Mella, Nicolás</li>
+  <li>Villan, Santiago</li>
+  <li>Jara, Tomás</li>
+  <li>Mirlhem, Ignacio</li>
+</ul>
+</section>
 
-  <section id="calidad">
-    <h2>Calidad del Producto</h2>
-    <div class="product-quality">
-      <p>
-        Nuestros paneles cuentan con un núcleo rígido de PIR (Poliisocianurato) optimizado para aislamiento térmico y acústico superior. Se destacan por:
-      </p>
-      <ul>
-        <li><strong>Alta resistencia mecánica:</strong> soportan impactos y esfuerzos estructurales.</li>
-        <li><strong>Baja absorción de agua:</strong> evitan daños y mantienen sus propiedades aislantes.</li>
-        <li><strong>Autoextinguible:</strong> mayor seguridad contra incendios.</li>
-        <li><strong>Fácil manipulación y montaje:</strong> corte sencillo y encastres herméticos.</li>
-        <li><strong>Diseño con cámara de aire:</strong> mejora la aislación térmica y acústica.</li>
-      </ul>
-      <p>
-        Cada panel es fabricado bajo estrictos controles de calidad para asegurar un producto confiable y duradero.
-      </p>
-    </div>
-  </section>
+<section id="historia">
+<h2>Historia</h2>
+<div class="timeline">
+<div class="year" onclick="toggleYear(this)">
+  <strong>1930-1950:</strong> Origen
+  <div class="year-content"><p>Primeras soluciones industriales de aislamiento térmico y eficiencia energética.</p></div>
+</div>
+<div class="year" onclick="toggleYear(this)">
+  <strong>1960-1970:</strong> Expansión
+  <div class="year-content"><p>Consolidación de construcciones rápidas y seguras; surgen normativas de aislamiento y seguridad contra fuego.</p></div>
+</div>
+<div class="year" onclick="toggleYear(this)">
+  <strong>1980-1990:</strong> Normativas
+  <div class="year-content"><p>Establecimiento de estándares internacionales para aislantes térmicos y resistentes al fuego.</p></div>
+</div>
+<div class="year" onclick="toggleYear(this)">
+  <strong>2000-2010:</strong> Innovación
+  <div class="year-content"><p>Introducción del PIR como aislante eficiente, ligero, resistente y seguro. Primeros paneles con cámara de aire optimizada y acabados duraderos.</p></div>
+</div>
+<div class="year" onclick="toggleYear(this)">
+  <strong>2010-2020:</strong> Evolución
+  <div class="year-content"><p>Paneles con acabados personalizados, montaje rápido y mayor eficiencia térmica y acústica. Expansión de nuestra presencia regional y adaptabilidad a proyectos comerciales y residenciales.</p></div>
+</div>
+<div class="year" onclick="toggleYear(this)">
+  <strong>Presente - Industry S.I.P:</strong> Innovación
+  <div class="year-content"><p>Panel PIR con placa simil madera: eficiencia térmica superior, resistencia mecánica, estética moderna y sustentable. Liderando la construcción rápida y eficiente con soluciones técnicas avanzadas, desarrollo de proyectos industriales, comerciales y residenciales de alta complejidad y eficiencia energética.</p></div>
+</div>
+</div>
+</section>
 
-  <section id="contacto">
-    <h2>Contacto</h2>
-    <form action="https://formspree.io/f/xrbkzlwg" method="POST">
-      <input type="text" name="name" placeholder="Tu nombre" required />
-      <input type="email" name="email" placeholder="Tu correo" required />
-      <input type="tel" name="phone" placeholder="Tu teléfono" />
-      <textarea name="message" placeholder="Escribí tu mensaje"></textarea>
-      <button type="submit">Enviar</button>
-    </form>
+<section id="productos">
+<h2>Productos</h2>
+<div class="productos-grid">
+<div class="producto">
+<img src="Captura de pantalla 2025-06-17 192617.png" alt="Panel con placa simil madera">
+<h3>Panel con placa simil madera</h3>
+<p>Panel de 4 cm con dos caras de chapa galvanizada, cámara de aire y placa simil madera. Excelente aislamiento térmico y resistencia mecánica.</p>
+</div>
+</div>
+</section>
 
-    <h3>Trabajá con Nosotros</h3>
-    <form action="https://formspree.io/f/xrbkzlwg" method="POST">
-      <input type="text" name="applicant_name" placeholder="Tu nombre completo" required />
-      <input type="email" name="applicant_email" placeholder="Tu correo" required />
-      <input type="tel" name="applicant_phone" placeholder="Tu teléfono" required />
-      <select name="position" required>
-        <option value="" disabled selected>Seleccione el puesto al que aplica</option>
-        <option value="Producción">Producción</option>
-        <option value="Administración">Administración</option>
-        <option value="Ventas">Ventas</option>
-        <option value="Logística">Logística</option>
-        <option value="Otro">Otro</option>
-      </select>
-      <textarea name="applicant_message" placeholder="Mensaje o información adicional"></textarea>
-      <button type="submit">Enviar Datos</button>
-    </form>
+<section id="calidad">
+<h2>Calidad del Producto</h2>
+<div class="product-quality">
+<p>Nuestros paneles cuentan con núcleo rígido de PIR optimizado para aislamiento térmico y acústico:</p>
+<ul>
+<li>Alta resistencia mecánica.</li>
+<li>Baja absorción de agua.</li>
+<li>Autoextinguible.</li>
+<li>Fácil manipulación y montaje.</li>
+<li>Diseño con cámara de aire.</li>
+</ul>
+<p>Fabricados bajo estrictos controles de calidad para garantizar durabilidad y confiabilidad.</p>
+</div>
+</section>
 
-    <div class="contact-info">
-      <p>Email: <a href="mailto:industrysip.srl@gmail.com">industrysip.srl@gmail.com</a></p>
-      <p>Teléfono: <a href="tel:+541124730339">+54 11 2473-0339</a></p>
-    </div>
-  </section>
+<section id="contacto">
+<h2>Contacto</h2>
+<form action="https://formspree.io/f/xrbkzlwg" method="POST">
+<input type="text" name="name" placeholder="Tu nombre" required>
+<input type="email" name="email" placeholder="Tu correo" required>
+<input type="tel" name="phone" placeholder="Tu teléfono">
+<textarea name="message" placeholder="Escribí tu mensaje"></textarea>
+<button type="submit">Enviar</button>
+</form>
 
-  <footer>
-    <p>&copy; 2025 Industry S.I.P - Todos los derechos reservados</p>
-  </footer>
+<h3>Trabajá con Nosotros</h3>
+<form action="https://formspree.io/f/xrbkzlwg" method="POST">
+<input type="text" name="applicant_name" placeholder="Tu nombre completo" required>
+<input type="email" name="applicant_email" placeholder="Tu correo" required>
+<input type="tel" name="applicant_phone" placeholder="Tu teléfono" required>
+<select name="position" required>
+<option value="" disabled selected>Seleccione el puesto al que aplica</option>
+<option value="Producción">Producción</option>
+<option value="Administración">Administración</option>
+<option value="Ventas">Ventas</option>
+<option value="Logística">Logística</option>
+<option value="Otro">Otro</option>
+</select>
+<textarea name="applicant_message" placeholder="Mensaje o información adicional"></textarea>
+<button type="submit">Enviar Datos</button>
+</form>
 
-  <script>
-    function mostrarSeccion(seccionId) {
-      const secciones = document.querySelectorAll('section');
-      secciones.forEach(sec => {
-        sec.classList.remove('active');
-      });
-      document.getElementById(seccionId).classList.add('active');
-    }
+<div class="contact-info">
+<p>Ubicación: Espacio Nova, Perito Moreno, Ezeiza, Buenos Aires</p>
+<p>Email: <a href="mailto:industrysip.srl@gmail.com">industrysip.srl@gmail.com</a></p>
+<p>Teléfono: <a href="tel:+541124730339">+54 11 2473-0339</a></p>
+</div>
+</section>
 
-    function toggleYear(element) {
-      element.classList.toggle('active');
-    }
-  </script>
+<footer>
+<p>&copy; 2025 Industry S.I.P - Todos los derechos reservados</p>
+</footer>
+
+<script>
+const logoMenu = document.getElementById('logo-menu');
+const navMenu = document.getElementById('nav-menu');
+
+logoMenu.addEventListener('click', e=>{
+  e.stopPropagation();
+  navMenu.style.width = (navMenu.style.width==='250px')?'0':'250px';
+});
+
+document.addEventListener('click', e=>{
+  if(navMenu.style.width==='250px' && !navMenu.contains(e.target) && !logoMenu.contains(e.target)){
+    navMenu.style.width='0';
+  }
+});
+
+function mostrarSeccion(seccionId){
+  document.querySelectorAll('section').forEach(sec=>sec.classList.remove('active'));
+  document.getElementById(seccionId).classList.add('active');
+  navMenu.style.width='0';
+}
+
+function toggleYear(el){
+  document.querySelectorAll('.timeline .year').forEach(y=>{
+    if(y!==el) y.classList.remove('active');
+  });
+  el.classList.toggle('active');
+}
+</script>
+
 </body>
 </html>
+s
